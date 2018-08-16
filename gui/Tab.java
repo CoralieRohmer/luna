@@ -1,4 +1,5 @@
 package gui;
+
 import tool.Constant;
 import javax.swing.*;
 import java.awt.*;
@@ -7,27 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
-
 import java.awt.FontMetrics;
-
 import java.awt.GradientPaint;
-
 import java.awt.Graphics;
-
 import java.awt.Graphics2D;
-
 import java.awt.Image;
-
 import java.awt.event.MouseEvent;
-
 import java.awt.event.MouseListener;
-
 import java.io.File;
-
 import java.io.IOException; 
-
 import javax.imageio.ImageIO;
-
 import javax.swing.JButton;
 
 /*
@@ -157,11 +147,11 @@ public class Tab extends JTabbedPane{
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		//~ Graphics2D g2d = (Graphics2D)g;
-		//~ GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
-		//~ g2d.setPaint(gp);
-		//~ g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-		//~ g2d.setColor(Color.black);     
+		Graphics2D g2d = (Graphics2D)g;
+		GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
+		g2d.setPaint(gp);
+		g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+		g2d.setColor(Color.black);     
 	}
 	/** Returns an ImageIcon, or null if the path was invalid. */
     protected static ImageIcon createImageIcon(String path) {

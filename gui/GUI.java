@@ -39,6 +39,19 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import java.awt.event.KeyEvent;
 import javax.swing.JScrollPane;
+import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.TransferHandler;
 
 
 /**
@@ -76,16 +89,17 @@ public class GUI extends JFrame implements WindowListener{
 	 */
 	public GUI(){
 	//Paramètre de la fenêtre
-    this.setTitle("Le Chat Noir");
+    this.setTitle("Luna");
     this.setSize(1500,900);
     this.setLocationRelativeTo(null);
     this.setMinimumSize(new Dimension(1100, 600));
     this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     this.addWindowListener(this);
     
+    
     //Change l'icône de la fenêtre
     Toolkit kit = Toolkit.getDefaultToolkit();
-    Image img = kit.getImage("Resources/Logo.png");
+    Image img = kit.getImage("Ressources/Logo.jpg");
     this.setIconImage(img);
 
     //~ //--------------------------------------------
@@ -97,6 +111,7 @@ public class GUI extends JFrame implements WindowListener{
 	JPanel content = new JPanel();
     content.setLayout(new BorderLayout());
 	content.add(onglets,BorderLayout.CENTER);
+	content.setTransferHandler(new MyFileTransferHandler());
 	this.setContentPane(content);
     this.setVisible(true);
 	}
@@ -104,6 +119,7 @@ public class GUI extends JFrame implements WindowListener{
 	//------------------------------------------------------------------
 	//				Methodes
 	//------------------------------------------------------------------
+	 
 	/**
 	* Redefinition de la methode windowsClosing de l'interface WindowListener
 	* pour lancer la demande d'une sauvegarde de la session
@@ -115,7 +131,7 @@ public class GUI extends JFrame implements WindowListener{
 	*/
 	public void windowClosing(WindowEvent evt) {
 		ImageIcon img = new ImageIcon("Resources/quiz.png");
-		int option = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment quitter?", "Texte", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,img);
+		int option = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment quitter?", "Fermeture", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,img);
 		if(option == JOptionPane.OK_OPTION){
 			System.exit(0);
 		}
@@ -143,4 +159,73 @@ public class GUI extends JFrame implements WindowListener{
 	public void windowDeiconified(WindowEvent evt) {};
 	public void windowActivated(WindowEvent evt) {};
 	public void windowDeactivated(WindowEvent evt) {};
+}
+
+/** Classe non publique pour gérer les gouttes de nom de fichier */
+
+class MyFileTransferHandler extends TransferHandler {
+
+  /**
+   * @see javax.swing.TransferHandler#canImport(javax.swing.JComponent,
+   *      java.awt.datatransfer.DataFlavor[])
+   */
+  public boolean canImport(JComponent arg0, DataFlavor[] arg1) {
+    for (int i = 0; i < arg1.length; i++) {
+      DataFlavor flavor = arg1[i];
+      if (flavor.equals(DataFlavor.javaFileListFlavor)) {
+        return true;
+      }
+      if (flavor.equals(DataFlavor.stringFlavor)) {
+        return true;
+      }
+    }
+    // Je n'ai pas trouvé de correspondance, donc :
+    return false;
+  }
+
+  /**
+   *  Effectuer l'importation proprement dite.
+   * 
+   * @see javax.swing.TransferHandler#importData(javax.swing.JComponent,
+   *      java.awt.datatransfer.Transferable)
+   */
+  public boolean importData(JComponent comp, Transferable t) {
+    DataFlavor[] flavors = t.getTransferDataFlavors();
+    for (int i = 0; i < flavors.length; i++) {
+      DataFlavor flavor = flavors[i];
+      try {
+        if (flavor.equals(DataFlavor.javaFileListFlavor)) {
+
+          List l = (List) t
+              .getTransferData(DataFlavor.javaFileListFlavor);
+          Iterator iter = l.iterator();
+          while (iter.hasNext()) {
+            File file = (File) iter.next();
+            // Maintenant, faites quelque chose avec le fichier.....
+          }
+          return true;
+        } else if (flavor.equals(DataFlavor.stringFlavor)) {
+          String fileOrURL = (String) t.getTransferData(flavor);
+          ImageIcon img = new ImageIcon("Ressources/Logo.gif");
+			int option = JOptionPane.showConfirmDialog(null, "Voulez-vous ajouter ce ou ces film(s)?", "Ajout", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,img);
+			if(option == JOptionPane.OK_OPTION){
+				System.out.println("Ajout validé");
+			}
+			if(option == JOptionPane.NO_OPTION){
+				System.out.println("Ajout refusé");
+			}
+		  System.out.println("Le chemin est : " + fileOrURL);
+          // Maintenant, faites quelque chose avec le String.
+
+        } else {
+          // Ne revenez pas ; essayez le Flavor suivante.
+        }
+      } catch (IOException ex) {
+      } catch (UnsupportedFlavorException e) {
+      }
+    }
+    // Si vous arrivez ici, je n'ai pas aimé le Flavor.
+    Toolkit.getDefaultToolkit().beep();
+    return false;
+  }
 }
