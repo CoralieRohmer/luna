@@ -99,7 +99,7 @@ public class GUI extends JFrame implements WindowListener{
     
     //Change l'icône de la fenêtre
     Toolkit kit = Toolkit.getDefaultToolkit();
-    Image img = kit.getImage("Ressources/Logo.jpg");
+    Image img = kit.getImage("../Ressources/Logo.jpg");
     this.setIconImage(img);
 
     //~ //--------------------------------------------
@@ -130,7 +130,7 @@ public class GUI extends JFrame implements WindowListener{
 	* @see Tool
 	*/
 	public void windowClosing(WindowEvent evt) {
-		ImageIcon img = new ImageIcon("Resources/quiz.png");
+		ImageIcon img = new ImageIcon("../Ressources/quiz.png");
 		int option = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment quitter?", "Fermeture", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,img);
 		if(option == JOptionPane.OK_OPTION){
 			System.exit(0);
@@ -206,7 +206,7 @@ class MyFileTransferHandler extends TransferHandler {
           return true;
         } else if (flavor.equals(DataFlavor.stringFlavor)) {
           String fileOrURL = (String) t.getTransferData(flavor);
-          ImageIcon img = new ImageIcon("Ressources/Logo.gif");
+          ImageIcon img = new ImageIcon("../Ressources/Logo.gif");
 			int option = JOptionPane.showConfirmDialog(null, "Voulez-vous ajouter ce ou ces film(s)?", "Ajout", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,img);
 			if(option == JOptionPane.OK_OPTION){
 				System.out.println("Ajout validé");

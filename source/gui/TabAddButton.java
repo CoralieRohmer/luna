@@ -66,8 +66,8 @@ public class TabAddButton extends JPanel {
         }
 
         public void actionPerformed(ActionEvent e) {
-			ImageIcon icon = createImageIcon("Ressources/Images/Wait.gif");
-			JComponent panel = makeTextPanel("Ressources/Images/test4.jpg");
+			ImageIcon icon = createImageIcon("../Ressources/Images/Wait.gif");
+			JComponent panel = makeTextPanel("../Ressources/Images/test4.jpg");
 			pane.addTab("False", icon, panel,
 					"C'est drôle");
 			//~ this.setTabComponentAt(2, new TabCloseButton(this));

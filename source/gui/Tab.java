@@ -33,7 +33,7 @@ public class Tab extends JTabbedPane{
 		super();
 		try {
 
-		  img = ImageIO.read(new File("fondBouton.png"));
+		  img = ImageIO.read(new File("../fondBouton.png"));
 
 		} catch (IOException e) {
 
@@ -41,23 +41,23 @@ public class Tab extends JTabbedPane{
 
 		}
 		this.removeAll();
-		ImageIcon icon = createImageIcon("../Ressources/Images/Wait.gif");
+		ImageIcon icon = createImageIcon("/home/coralie/luna/Ressources/Images/test1.png");
 		 
-		JComponent panel1 = makeTextPanel("Ressources/Images/test1.png");
+		JComponent panel1 = makeTextPanel("../Ressources/Images/test1.png");
 		panel1.setPreferredSize(new Dimension(getWidth(), getHeight()));
 		this.addTab("Manette", icon, panel1,
 				"Manette Nes");
 		this.setMnemonicAt(0, KeyEvent.VK_1);
 		this.setTabComponentAt(0, new TabCloseButton(this));
 		 
-		JComponent panel2 = makeTextPanel("Ressources/Images/test2.png");
+		JComponent panel2 = makeTextPanel("../Ressources/Images/test2.png");
 		this.addTab("Portal", icon, panel2,
 				"Portal Toilette");
 		this.setMnemonicAt(1, KeyEvent.VK_2);
 		this.setTabComponentAt(1, new TabCloseButton(this));
 		this.setBackgroundAt(1, Constant.GUI_COLOR);
 		 
-		JComponent panel3 = makeTextPanel("Ressources/Images/test3.png");
+		JComponent panel3 = makeTextPanel("../Ressources/Images/test3.png");
 		this.addTab("Blague", icon, panel3,
 				"Blague de developpeur");
 		this.setMnemonicAt(2, KeyEvent.VK_3);
@@ -147,11 +147,11 @@ public class Tab extends JTabbedPane{
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D)g;
-		GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
-		g2d.setPaint(gp);
-		g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-		g2d.setColor(Color.black);     
+		//~ Graphics2D g2d = (Graphics2D)g;
+		//~ GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
+		//~ g2d.setPaint(gp);
+		//~ g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+		//~ g2d.setColor(Color.black);     
 	}
 	/** Returns an ImageIcon, or null if the path was invalid. */
     protected static ImageIcon createImageIcon(String path) {
