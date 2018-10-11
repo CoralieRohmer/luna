@@ -1,0 +1,5 @@
+#Ignore le dossier qui contient les films et la base de donnée
+/Film
+/Ressources
+*.class
+/bin

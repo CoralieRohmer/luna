@@ -52,6 +52,7 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.TransferHandler;
+import moviepage.MoviePage;
 
 
 /**

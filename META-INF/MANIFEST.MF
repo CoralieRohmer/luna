@@ -1,3 +1,5 @@
 Manifest-Version: 1.0
+Created-By: c-rohmer
 Main-Class: Main
+Class-Path: gui.* homepage/*.class moviepage/*.class searchpage/*.class tool/*.class Archives/mysql-connector-java_8.0.12-1ubuntu18.04_all.deb
 

@@ -1,1 +1,4 @@
-MoviePage
+/**
+ * MoviePage.java
+ */
+package moviepage;
